@@ -91,7 +91,12 @@ class Product_model extends CI_Model {
         $insert = $this->db->insert("code_table", $array);
         return $insert;
     }
-    
+    public function check_code($code){
+        return $this->db->where(array('code' => $code,'is_used'=>0))->get('code_table')->row();
+    }
+    public function used_code($code,$array){
+        return $this->db->where(array('code' => $code,'is_used'=>0))->update('code_table',$array);
+    }
     public function addProduct($array, $image_link, $zip_link) {
         $insert = $this->db->insert("product_table", $array);
         $product_id = $this->db->insert_id();

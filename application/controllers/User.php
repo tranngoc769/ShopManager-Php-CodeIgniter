@@ -6,27 +6,66 @@ class User extends My_Controller
         $this->load->model('user_model');
         $this->load->model('cart_model');
         $this->load->model('gate_model');
+        $this->load->model('product_model');
     }
-
+    public function charge(){
+        $this->gate_model->dev_user_data();
+        $data['userData']= $this->user_model->get_userdetail()->row();
+        $this->load->view('layout/user/header', array('title' => 'Change Details'));
+        $this->loadUserSidebar('show_profile', 'change_detail_active');
+        $this->load->view('user/charge', $data);
+        $this->load->view('layout/dashboard/logout');
+        $this->load->view('layout/user/footer');
+    }
     public function index() {
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $this->load->view('layout/user/header');
         $this->load->view('user/login');
         $this->load->view('layout/account/footer');
     }
     
+    public function charge_cash() {
+        $this->gate_model->dev_user_data();
+        $user = $this->user_model->get_userdetail()->row();
+        $cashcode = $this->input->post('cash_code');
+        $id =$user->user_id;
+        $check = $this->product_model->check_code($cashcode);
+        if ($check==null){
+            $this->session->set_flashdata('msg', "Code is used or not available"); 
+            redirect(site_url('user/charge'));
+        }
+        $cash = $check->cash;
+        $data['used_by'] = $id;
+        $data['date_used'] =  date("Y-m-d h:i:sa");
+        $data['is_used'] = 1;
+        $update = $this->product_model->used_code($cashcode, $data);
+        if (!$update){
+            $this->session->set_flashdata('msg', "Cannot use code"); 
+            redirect(site_url('user/charge'));
+        }
+        // 
+        $up_cash['cash'] =  intval($user->cash) + intval($cash); 
+        $update = $this->user_model->update_cash($id, $up_cash);
+        if (!$update){
+            $this->session->set_flashdata('msg', "Cannot use code"); 
+            redirect(site_url('user/charge'));
+        }
+        $this->session->set_flashdata('msg', "Success"); 
+        redirect(site_url('user/charge'));
+    }
+    
     public function dashboard() {
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $this->load->view('layout/user/header', array('title' => 'User Dashboard'));
         $this->loadUserSidebar(null, null);
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $this->load->view('user/dashboard');
         $this->load->view('layout/dashboard/logout');
         $this->load->view('layout/user/footer');
     }
     
     public function change_details() {		
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $data['userData']= $this->user_model->get_userdetail()->row();
         $this->load->view('layout/user/header', array('title' => 'Change Details'));
         $this->loadUserSidebar('show_profile', 'change_detail_active');
@@ -36,7 +75,7 @@ class User extends My_Controller
     }
     
     public function change_userdetail() {
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $user = $this->user_model->get_userdetail()->row();
         $this->form_validation->set_rules(
             'fname', 'First Name',
@@ -104,7 +143,7 @@ class User extends My_Controller
     }
     
     public function change_password() {
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $data['userData']	=	$this->user_model->get_userdetail()->row();
         $this->load->view('layout/user/header', array('title' => 'Change Password'));
         $this->loadUserSidebar('show_profile', 'change_password_active');
@@ -114,7 +153,7 @@ class User extends My_Controller
     }
     
     public function change_userpassword() {
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $data['oldpassword']	=	$this->input->post('oldpassword');
         $data['newpassword']	=	$this->input->post('newpassword');
         $data['renewpassword']	=	$this->input->post('renewpassword');
@@ -122,7 +161,7 @@ class User extends My_Controller
     }
     
     public function your_cart() {
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $cartExist = $this->cart_model->hasActiveCart();
         if ($cartExist) {
             $cartid = $this->cart_model->getUserActiveCartID();
@@ -142,7 +181,7 @@ class User extends My_Controller
     }
     
     public function checkout() {
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $cartid = $this->cart_model->getUserActiveCartID();
         $cartData = $data['cartData'] = $this->cart_model->getProductsInCart($cartid);
         if (count($cartData) == 0) {
@@ -191,7 +230,7 @@ class User extends My_Controller
     }
     
     public function view_order($cartid) {
-        $this->gate_model->user_gate();
+        $this->gate_model->dev_user_data();
         $status = $this->cart_model->userCartChecking($cartid);
         if (!$status) {
             $message = '<div class="alert alert-danger" style="margin-top:10px" role="alert">You are not allowed to access this page. </div>';
