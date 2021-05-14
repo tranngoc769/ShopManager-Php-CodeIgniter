@@ -26,6 +26,17 @@
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#cash_col" data-parent="#cash_col">
+            <i class="fa fa-user"></i>
+            <span class="nav-link-text">Cash Manager</span>
+          </a>
+          <ul class="sidenav-second-level collapse <?= $show_profile; ?>" id="cash_col">
+            <li class="<?= $change_password_active; ?>">
+              <a href="<?php echo site_url("user/charge");?>">Charge Cash</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#product" data-parent="#exampleAccordion">
             <i class="fa fa-shopping-cart"></i>
             <span class="nav-link-text">Carts and Orders</span>

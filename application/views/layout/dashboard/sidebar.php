@@ -25,14 +25,14 @@
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Products">
 					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti3" data-parent="#exampleAccordion">
 						<i class="fa fa-fw fa-gift"></i>
-						<span class="nav-link-text">Products</span>
+						<span class="nav-link-text">Code</span>
 					</a>
-					<ul class="sidenav-second-level collapse <?= $show_product; ?>" id="collapseMulti3">
-						<li class="<?= $manage_product_active; ?>">
-							<a href="<?= site_url('admin/view_product'); ?>">Manage</a>
+					<ul class="sidenav-second-level collapse <?= $show_code; ?>" id="collapseMulti3">
+						<li class="<?= $manage_code_active; ?>">
+							<a href="<?= site_url('admin/view_code'); ?>">Manage</a>
 						</li>
 						<li class="<?= $add_product_active; ?>">
-							<a href="<?= site_url('admin/add_product'); ?>">Add</a>
+							<a href="<?= site_url('admin/add_code'); ?>">Add</a>
 						</li>
 					</ul>
 				</li>

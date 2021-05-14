@@ -46,14 +46,13 @@ class Admin extends My_Controller
         $this->load->view('layout/dashboard/footer');
     }
     
-    public function view_product()
+    public function view_code()
     {
         $this->gate_model->admin_gate();
-        $data["productlist"] = $this->product_model->getAllProducts();
-        $data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
+        $data["code_list"] = $this->product_model->getAllCodes();
         $this->load->view('layout/dashboard/header', array("title" => "View Products"));
-        $this->loadSidebar("show_product", "manage_product_active");
-        $this->load->view('admin/view_product',$data);
+        $this->loadSidebar("show_code", "manage_code_active");
+        $this->load->view('admin/view_code',$data);
         $this->load->view('layout/dashboard/footer');
     }
     
@@ -79,13 +78,12 @@ class Admin extends My_Controller
         echo json_encode($arr);
     }
     
-    public function add_product()
+    public function add_code()
     {
         $this->gate_model->admin_gate();
-        $data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
-        $this->load->view('layout/dashboard/header', array("title" => "Add Product"));
-        $this->loadSidebar("show_product", "add_product_active");
-        $this->load->view('admin/add_product',$data);
+        $this->load->view('layout/dashboard/header', array("title" => "Add Code"));
+        $this->loadSidebar("show_code", "add_code_active");
+        $this->load->view('admin/add_code');
         $this->load->view('layout/dashboard/footer');
     }
     
@@ -102,7 +100,7 @@ class Admin extends My_Controller
             $data["image_link"] = $image_link;
         }
         $this->load->view('layout/dashboard/header', array("title" => "Edit Product"));
-        $this->loadSidebar("show_product", "manage_product_active");
+        $this->loadSidebar("show_code", "manage_code_active");
         $this->load->view('admin/edit_product',$data);
         $this->load->view('layout/dashboard/footer');
     }

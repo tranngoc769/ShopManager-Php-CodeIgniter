@@ -14,6 +14,10 @@ class User_model extends CI_Model {
     {
         return $this->db->where("user_id", $userid)->update(USER, $data);
     }
+    public function update_cash($userid, $data)
+    {
+        return $this->db->where("user_id", $userid)->update(USER, $data);
+    }
 
     /**
         Get the current login user's detail

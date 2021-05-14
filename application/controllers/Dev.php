@@ -21,7 +21,7 @@ class Dev extends My_Controller
         $data['messages'] = $this->contact_model->getMessages();
         $this->load->view('layout/dashboard/header', array('title' => 'Developer Dashboard'));
         $this->loadDevSidebar(null, null);
-        $this->load->view('admin/dashboard', $data);
+        $this->load->view('dev/dashboard', $data);
         $this->load->view('layout/dashboard/footer');
     }
     
@@ -32,7 +32,7 @@ class Dev extends My_Controller
         $data['message'] = $this->contact_model->getMessage($message_id)->row();
         $this->load->view('layout/dashboard/header', array('title' => 'Admin Dashboard'));
         $this->loadDevSidebar(null, null);
-        $this->load->view('admin/read_message', $data);
+        $this->load->view('dev/read_message', $data);
         $this->load->view('layout/dashboard/footer');
     }
     
@@ -45,7 +45,7 @@ class Dev extends My_Controller
         $data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
         $this->load->view('layout/dashboard/header', array("title" => "View Products"));
         $this->loadDevSidebar("show_product", "manage_product_active");
-        $this->load->view('admin/view_product',$data);
+        $this->load->view('dev/view_product',$data);
         $this->load->view('layout/dashboard/footer');
     }
     
@@ -55,13 +55,13 @@ class Dev extends My_Controller
         $data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
         $this->load->view('layout/dashboard/header', array("title" => "Add Product"));
         $this->loadDevSidebar("show_product", "add_product_active");
-        $this->load->view('admin/add_product',$data);
+        $this->load->view('dev/add_product',$data);
         $this->load->view('layout/dashboard/footer');
     }
     
     public function edit_product($product_id)
     {
-        $this->gate_model->admin_gate();
+        $this->gate_model->dev_gate();
         $data['product'] = $this->product_model->getProduct($product_id)->row();
         $data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
         $data["product_id"] = $product_id;
@@ -73,7 +73,7 @@ class Dev extends My_Controller
         }
         $this->load->view('layout/dashboard/header', array("title" => "Edit Product"));
         $this->loadDevSidebar("show_product", "manage_product_active");
-        $this->load->view('admin/edit_product',$data);
+        $this->load->view('dev/edit_product',$data);
         $this->load->view('layout/dashboard/footer');
     }
     

@@ -88,4 +88,5 @@ defined("CATEGORY") or define("CATEGORY","category_table catt");
 defined("PRODUCT") or define("PRODUCT","product_table pt");
 defined("USER") or define("USER","user_table");
 defined("CART") or define("CART","cart_table");
+defined("CODE") or define("CODE","code_table");
 defined("PRODUCTCART") or define("PRODUCTCART","product_cart_table");
