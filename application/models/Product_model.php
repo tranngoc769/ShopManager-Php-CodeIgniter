@@ -10,6 +10,9 @@ class Product_model extends CI_Model {
     public function getAllProducts() {
         return $this->db->join(CATEGORY, "catt.category_id = pt.category_id")->get(PRODUCT);
     }
+    public function getAllCodes() {
+        return $this->db->get(CODE);
+    }
 
     /**
         Get six products for display on homepage
@@ -80,11 +83,20 @@ class Product_model extends CI_Model {
 
         @return void
     **/
-
-    public function addProduct($array, $image_link) {
+    public function addProductNoImage($array){
+        $insert = $this->db->insert("product_table", $array);
+        return $insert;
+    }
+    public function add_code($array){
+        $insert = $this->db->insert("code_table", $array);
+        return $insert;
+    }
+    
+    public function addProduct($array, $image_link, $zip_link) {
         $insert = $this->db->insert("product_table", $array);
         $product_id = $this->db->insert_id();
         $this->db->insert('product_images', array('product_id' => $product_id, "image_link" => $image_link));
+        $this->db->insert('product_zips', array('product_id' => $product_id, "zip_link" => $zip_link));
         return $insert;
     }
 
