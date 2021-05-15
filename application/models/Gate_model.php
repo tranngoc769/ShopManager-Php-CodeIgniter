@@ -1,10 +1,6 @@
 <?php
 
 class Gate_model extends CI_Model {
-    
-    /**
-     Bounce users off from accessing ajax links
-     **/
     function ajax_gate() {
         if (!$this->input->is_ajax_request()) {
             $message = "<div class='alert alert-danger alert-dismissable my-4'>";
@@ -15,10 +11,6 @@ class Gate_model extends CI_Model {
             redirect('shop');
         }
     }
-
-    /**
-	 Bounce users off the admin dashboard
-	 **/
 	public function admin_gate() {
 		if ($this->session->userdata('usertype') != 'admin') {
 			$message = "<div class='alert alert-danger alert-dismissable my-4'>";
@@ -64,9 +56,6 @@ class Gate_model extends CI_Model {
       }
     }
     
-    /**
-     Bounce users off the user dashboard
-    **/
     public function user_gate() {
         if ($this->session->userdata('usertype') != 'user') {
             $message = "<div class='alert alert-danger alert-dismissable my-4'>";

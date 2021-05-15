@@ -6,6 +6,7 @@ class CART extends CI_Controller {
         $this->load->model('cart_model');
         $this->load->model('gate_model');
         $this->load->model('user_model');
+        $this->load->model('product_model');
     }
 
 

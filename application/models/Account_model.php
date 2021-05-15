@@ -2,14 +2,7 @@
 
 class Account_model extends CI_Model {
 
-    /**
-        Login User
-
-        @param arr $data [USER LOGIN CREDENTIAL]
-
-        @return bool FALSE if unsuccessful
-        @return String $user_type
-    **/
+    
     public function login($data) {
         $query = $this->db
             ->limit(1)
@@ -26,13 +19,7 @@ class Account_model extends CI_Model {
         }	
     }
 
-    /**
-        Register user
-
-        @param arr $data [USER CREDENTIAL]
-
-        @return bool TRUE if successfuly
-    **/
+    
 
     public function register($data)
     {
