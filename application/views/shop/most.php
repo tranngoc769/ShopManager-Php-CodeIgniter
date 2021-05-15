@@ -4,55 +4,7 @@
 	<?php echo $this->session->flashdata("success"); ?>
 	<div id="alert_message"></div>
 	<div class="row">
-		<div class="col-lg-3">
-			<h3 class="my-4">Category</h3>
-			<ul class="list-group">
-				<?php foreach( $categoryData as $category ): ?>
-					<li class="list-group-item">
-						<a data-toggle="collapse" href="#<?= $category->category_id; ?>SubListGroup">
-							<div>
-								<?= $category->category_name; ?>
-								<?php if(count($category->subCategory) != 0): ?>
-									<i class="fa fa-chevron-right pull-right" aria-hidden="true"></i>
-								<?php endif; ?>
-							</div>
-						</a>
-						<div id="<?= $category->category_id; ?>SubListGroup" class="panel-collapse collapse">
-							<ul class="list-unstyled">
-								<?php 
-									foreach( $category->subCategory as $subCat ): 
-								?>
-									<li class="list-group-item" style="border: none;">
-										<div>
-											<a href="#<?= $subCat->category_id; ?>" onclick="selectCategory(<?= $subCat->category_id; ?>, '<?= $subCat->category_name; ?>')">
-												<?= $subCat->category_name; ?>
-											</a>
-										</div>
-									</li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
-					</li>
-
-				<?php endforeach; ?>
-			</ul>
-			<ul class="list-group">
-				<li class="list-group-item" style="border: none;">
-					<div>
-						<a href="/index.php/mostdownload">Most Paid Download</a>
-					</div>
-				</li>
-				<li class="list-group-item" style="border: none;">
-					<div>
-						<a href="/index.php/mostfree">Most Free Download</a>
-					</div>
-				</li>
-			</ul>
-
-		</div>
-		<!-- /.col-lg-3 -->
-
-		<div class="col-lg-9">
+		<div class="col-lg-12">
 			<div id="search-bar" class=" mt-4 mb-2">
 				<div class="input-group">
 					<input type="text" name="search" id="search" class="form-control" placeholder="Search Product..."/>
@@ -113,6 +65,7 @@
 									B$ <?= $product->price; ?>
 								</h6>
 								<p class="card-text"><?= $product->short_desc; ?></p>
+								<p class="card-text">Downloaded: <?= $product->download; ?></p>
 							</div>
 							<div class="card-footer">
 								<!-- <?= form_open(site_url('cart/addToCart'), array( "id" => "addToCart_$product->product_id")); ?> -->

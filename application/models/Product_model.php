@@ -187,4 +187,24 @@ class Product_model extends CI_Model
             return false;
         }
     }
+    public function GetMostPaidDownLoadProduct($limit, $start)
+    {
+        $sql = "SELECT COUNT(pct.product_id) as download,pi.image_link, pct.product_id, pt.category_id, pt.seller_id, pt.product_name, pt.price, pt.short_desc, pt.description, pt.add_time, pt.active_flag FROM  product_table pt JOIN product_cart_table pct on pt.product_id = pct.product_id JOIN product_images pi on pi.product_id = pct.product_id WHERE pt.cost_app = 1 GROUP BY pct.product_id ORDER BY download DESC LIMIT ".$limit."  OFFSET ".$start;
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+    public function GetMostFreeDownLoadProduct($limit, $start)
+    {
+        $sql = "SELECT COUNT(pct.product_id) as download,pi.image_link, pct.product_id, pt.category_id, pt.seller_id, pt.product_name, pt.price, pt.short_desc, pt.description, pt.add_time, pt.active_flag FROM  product_table pt JOIN product_cart_table pct on pt.product_id = pct.product_id JOIN product_images pi on pi.product_id = pct.product_id WHERE pt.cost_app = 0 GROUP BY pct.product_id ORDER BY download DESC LIMIT ".$limit."  OFFSET ".$start;
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
 }

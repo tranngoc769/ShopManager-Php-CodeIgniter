@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Shop extends CI_Controller {
+class MostFree extends CI_Controller {
 
 
     public function __construct() {
@@ -16,8 +16,8 @@ class Shop extends CI_Controller {
     
     public function index() {
         $this->load->library('pagination');
+        
         $config['base_url'] = site_url('shop/index');
-        $config['total_rows'] = $this->product_model->getProductCount();
         $config['per_page'] = 6;
         $config['uri_segment'] = 3;
         $config['num_links'] = 2;
@@ -39,15 +39,14 @@ class Shop extends CI_Controller {
         
         
         $this->pagination->initialize($config);
-
-        $categoryData = $this->category_model->getAllCategoriesWithSubCategories();
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         if ($page == 1 || $page == null){
-            $offset = 1;
+            $offset = 0;
         } else {
             $offset = ($page-1)*$config['per_page']+1;
         }
-        $sixProducts = $this->product_model->getLimitProducts($config['per_page'], $offset);
+        $sixProducts = $this->product_model->GetMostFreeDownLoadProduct($config['per_page'], $offset);
+        $config['total_rows'] = count($sixProducts);
         $link = $this->pagination->create_links();
         $active = array(
             "home" => null,
@@ -60,7 +59,7 @@ class Shop extends CI_Controller {
         
         
         $this->load->view('layout/shop/header', $active);
-        $this->load->view('shop/home', array('categoryData' => $categoryData, 'sixProducts' => $sixProducts, "link" => $link));
+        $this->load->view('shop/most', array('sixProducts' => $sixProducts, "link" => $link));
         $this->load->view('layout/shop/footer');
     }
     

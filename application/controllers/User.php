@@ -40,7 +40,16 @@ class User extends My_Controller
             return;
         }
         $data['user_id'] = $user_id;
+        // check tien ao
+        $us_data = $this->user_model->get_userdetail()->row();
+        if ($us_data->cash < 500000){
+            $this->session->set_flashdata('msg', "Not enough 500000 cash"); 
+            redirect(site_url('user/upgrade'));
+            return;
+        }
         if ($this->user_model->upgrade_request($data)){
+            $c_cash['cash'] = $us_data->cash - 500000;
+            $this->user_model->update_cash($user_id,$c_cash);
             $this->session->set_flashdata('msg', "Request success"); 
             redirect(site_url('user/upgrade'));
             return;
