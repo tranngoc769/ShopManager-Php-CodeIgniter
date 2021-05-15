@@ -24,7 +24,6 @@
                     <th>No</th>
                     <th>Product Image</th>
                     <th>Name</th>
-                    <th>Quantity</th>
                     <th>Price</th>
                   </thead>
                   <?php foreach($cartData as $cart): ?>
@@ -39,9 +38,6 @@
                       <a href="<?= site_url('shop/product/'.$cart->product_id);?>">
                         <strong><em><?= $cart->product_name; ?></em></strong>
                       </a>
-                    </td>
-                    <td rowspan=1 align="left" >
-                      Qty : <?= $cart->quantity;?>
                     </td>
                     <td rowspan=1 align="left" >
                       Price : $ <?= number_format ( $cart->price * $cart->quantity, 2 );?>

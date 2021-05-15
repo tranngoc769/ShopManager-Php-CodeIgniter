@@ -15,7 +15,7 @@
 							<h4>$ <?= $product->price?></h4>
 							<strong>Short Description</strong>
 							<p class="card-text"><?= $product->short_desc?></p>
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity" id="quantity_<?= $product->product_id; ?>" />
+							<input type="number" name="quantity" class="form-control"  value='1' hidden id="quantity_<?= $product->product_id; ?>" />
 							<input type="hidden" name="product_id" class="form-control" value="<?= $product->product_id; ?>"/>
 							<br>
 							<button class="pull-right btn btn-block btn-primary" type="button" onclick="addToCart(<?= $product->product_id; ?>)">

@@ -18,6 +18,9 @@ class CART extends CI_Controller {
         // $this->gate_model->ajax_gate();
         $product_id = $_POST['product_id'];
         $quantity = $_POST['quantity'];
+        if ($quantity != 1){
+            $quantity = 1;
+        }
         if ($this->session->userdata('usertype') != 'user' && $this->session->userdata('usertype') != 'admin') {
             $message = "Need to login first!";
             $array = array("success" => false, "message" => $message, "title" => "Warning!");

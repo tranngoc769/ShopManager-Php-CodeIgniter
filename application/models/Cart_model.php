@@ -151,6 +151,9 @@ class Cart_model extends CI_Model {
     **/
 
     public function addProductToCart($cart_id, $product_id, $quantity) {
+        if ($quantity != 1){
+            $quantity = 1;
+        }
         $array = array (
             "cart_id" => $cart_id,
             "product_id" => $product_id,

@@ -24,8 +24,9 @@
 		<script> 
 	        // wait for the DOM to be loaded 
 			function addToCart(product_id) {
-				var quantity = "#quantity_"+product_id;
-				quantity = $(quantity).val();
+				// var quantity = "#quantity_"+product_id;
+				// quantity = $(quantity).val();
+				var quantity = 1;
 				// alert(product_id);
 				// alert(quantity);
 				if (quantity == "") {
@@ -33,13 +34,13 @@
 						$("#modal_body").html("Please enter the quantity");
 						$("#modal_title").html("Warning");
 						$("#modal_footer").html("<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>");
-				} else if (quantity < 0) {
+				} else if (quantity != 1) {
 						$("#alert_modal").modal("show");
 						$("#modal_body").html("Quantity cannot be less than 0!");
 						$("#modal_title").html("Warning");
 						$("#modal_footer").html("<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>");
 				} else {
-					$.post("<?= site_url('cart/addToCart'); ?>", {"quantity":quantity, "product_id":product_id},
+					$.post("<?= site_url('cart/addToCart'); ?>", {"quantity":1, "product_id":product_id},
 						function(data) {
 							console.log(data);
 							$("#alert_modal").modal("show");
