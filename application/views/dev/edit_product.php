@@ -62,7 +62,7 @@
         <div class="form-group">
           <label class="control-label">Product Long Description</label>
           <div>
-            <input type="text" class="form-control" value="<?= $product->description; ?>" name="product_long_description"></input>
+          <textarea id="textarea" value="<?= $product->description; ?>" name="product_long_description"><?= $product->description; ?></textarea>
           </div>
         </div>
 

@@ -151,14 +151,15 @@ class Cart_model extends CI_Model {
         @return bool
     **/
 
-    public function addProductToCart($cart_id, $product_id, $quantity) {
+    public function addProductToCart($cart_id, $product_id, $quantity, $dev_id) {
         if ($quantity != 1){
             $quantity = 1;
         }
         $array = array (
             "cart_id" => $cart_id,
             "product_id" => $product_id,
-            "quantity" => $quantity
+            "quantity" => $quantity,
+            "dev_id" => $dev_id
         );
         return $this->db->insert("product_cart_table", $array);
     }
@@ -175,6 +176,7 @@ class Cart_model extends CI_Model {
         return $this->db
             ->join("product_table pt", "pt.product_id = pct.product_id")
             ->join('product_images pi', 'pi.product_id = pt.product_id')
+            ->join('product_zips pl', 'pl.product_id = pt.product_id')
             ->join('cart_table ct', 'ct.cart_id = pct.cart_id')
             ->get_where("product_cart_table pct", array("pct.cart_id" => $cart_id))
             ->result();

@@ -49,7 +49,8 @@ class CART extends CI_Controller {
             } else {
                 $cart_id = $this->cart_model->addNewCart();
             }
-            $insert = $this->cart_model->addProductToCart($cart_id, $product_id, $quantity);
+            $dev_id = $this->product_model->getProductDev($product_id);
+            $insert = $this->cart_model->addProductToCart($cart_id, $product_id, $quantity,$dev_id);
             if ($insert) {
                 $message = "Add product successfully";
                 $array = array (
@@ -79,33 +80,6 @@ class CART extends CI_Controller {
 
         $this->session->set_flashdata('msg', $message);
         redirect('user/your_cart');
-    }
-    
-    public function checkout() {
-        $data['user_id'] = $this->input->post('user_id');
-        $data['country'] = $this->input->post('country');
-        $data['postcode'] = $this->input->post('postcode');
-        $data['address'] = $this->input->post('address');
-        $data['town'] = $this->input->post('town');
-        $shipping_address = $this->user_model->get_shipping_address($data['user_id']);
-        if (count($shipping_address->row()) != 0) {
-            $this->user_model->update_shipping_address($data, $data['user_id']);
-        } else {
-            $this->user_model->add_shipping_address($data);
-        }
-        $cartid = $this->cart_model->getUserActiveCartID();
-        $products = $this->cart_model->getProductsInCart($cartid);
-        $count = count($products);
-        if ($count == 0) {
-            $message = '<div class="alert alert-danger" style="margin-top:10px" role="alert"> You have No products in your cart. </div>'; 
-            $this->session->set_flashdata('msg', $message);
-            redirect('user/your_cart');
-        } else {
-            $this->cart_model->buyCart($cartid);
-            $message = '<div class="alert alert-success" style="margin-top:10px" role="alert"> You have purchased your cart. </div>'; 
-            $this->session->set_flashdata('msg', $message);
-            redirect('user/your_cart');
-        }
     }
 
 }

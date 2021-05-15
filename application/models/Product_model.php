@@ -129,6 +129,19 @@ class Product_model extends CI_Model
             return false;
         }
     }
+    public function update_downloadlink($product_id, $data){
+        $update = $this->db->where("product_id", $product_id)->update("product_cart_table", $data);
+        return $update;
+    }
+    public function getProductDev($product_id)
+    {
+        $image = $this->db->get_where('product_table', array('product_id' => $product_id))->row();
+        if (count($image) != 0) {
+            return $image->seller_id;
+        } else {
+            return false;
+        }
+    }
     public function getProductReview($product_id)
     {
         return $this->db

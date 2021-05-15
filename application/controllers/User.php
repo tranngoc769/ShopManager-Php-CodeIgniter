@@ -189,27 +189,28 @@ class User extends My_Controller
             $this->session->set_flashdata('msg', $message);
             redirect('user/your_cart');
         } else {
-            $data['totalPrice'] = 0;
+            $user_data = $this->user_model->get_userdetail($this->session->userdata('userid'))->row();
+            $totalPrice = 0;
             foreach($cartData as $cart) {
-                $data['totalPrice'] += $cart->price * $cart->quantity;
+                $totalPrice += $cart->price * $cart->quantity;
             }
-            
-            $data['user'] = $this->user_model->get_userdetail($this->session->userdata('userid'))->row();
-            $shipping = $data['shipping_address'] = $this->user_model->get_shipping_address($this->session->userdata('userid'))->row_array();
-            if (count($shipping) == 0) {
-                $data['shipping_address'] = array(
-                    "address_id" => "",
-                    "user_id" => "",
-                    "country" => "",
-                    "postcode" => "",
-                    "address" => "",
-                    "town" => "",
-                );
+            if ($user_data->cash < $totalPrice ){
+                $message = '<div class="alert alert-danger" style="margin-top:10px" role="alert"> Your dont have enough cash</div>'; 
+                $this->session->set_flashdata('msg', $message);
+                redirect('user/your_cart');
+                return;
             }
-    
-            $this->load->view('layout/user/header', array('title' => 'Checkout'));
+            foreach($cartData as $cart) {
+                $ud_data['link'] = str_replace("uploads/","downloads/".$user_data->user_id."_",$cart->zip_link);
+                $this->product_model->update_downloadlink($cart->product_id,$ud_data);
+                copy($cart->zip_link, $ud_data['link']);
+            }
+            $cash_new['cash'] = $user_data->cash - $totalPrice;
+            $this->user_model->update_cash($user_data->user_id,$cash_new);
+            $this->cart_model->buyCart($cartid);
+            $this->load->view('layout/user/header', array('title' => 'Cart'));
             $this->loadUserSidebar('show_cart_order', 'your_cart_active');
-            $this->load->view('user/checkout', $data);
+            redirect('user/your_cart');
             $this->load->view('layout/dashboard/logout');
             $this->load->view('layout/user/footer');
         }

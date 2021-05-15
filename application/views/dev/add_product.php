@@ -63,7 +63,7 @@
           <?= form_error('product_long_description'); ?>
           <label class="control-label">Product Long Description</label>
           <div>
-            <textarea class="form-control"  id="product_long_description" name="product_long_description"></textarea>
+            <textarea class="form-control" id="product_long_description" name="product_long_description"></textarea>
           </div>
         </div>
         <div class="form-group">
