@@ -16,6 +16,17 @@ class Admin_model extends CI_Model {
 	}
 
 	
+	public function upgrade_user($userid = "")
+	{
+		$res = $this->db->where("user_id", $userid)->update(USER, array("user_type" => 'dev'));
+        $this->db->where("user_id", $userid)->delete("upgrade_table");
+		return $res;
+	}
+	public function reject_user($userid = "")
+	{
+        return $this->db->where("user_id", $userid)->delete("upgrade_table");
+		
+	}
 
 	public function unbanUser($userid = "")
 	{

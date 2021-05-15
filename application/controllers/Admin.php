@@ -17,8 +17,7 @@ class Admin extends My_Controller
     public function index()
     {
         $this->gate_model->admin_gate();
-        $data['newMessagesCount'] = $this->contact_model->getNewMessagesCount();
-        $data['messages'] = $this->contact_model->getMessages();
+        $data['all_request'] = $this->user_model->get_upgrade_requests();
         $this->load->view('layout/dashboard/header', array('title' => 'Admin Dashboard'));
         $this->loadSidebar(null, null);
         $this->load->view('admin/dashboard', $data);
@@ -66,7 +65,16 @@ class Admin extends My_Controller
         header('Content-Type: application/json');
         echo json_encode($arr);
     }
-    
+    public function upgrade($userId)
+    {
+        $ug = $this->admin_model->upgrade_user($userId);
+        redirect('admin/');
+    }
+    public function reject($userId)
+    {
+        $ug = $this->admin_model->reject_user($userId);
+        redirect('admin/');
+    }
     public function unban_user()
     {
         $userId = $_GET['userId'];

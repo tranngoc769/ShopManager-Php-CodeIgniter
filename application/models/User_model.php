@@ -57,6 +57,11 @@ class User_model extends CI_Model {
     public function upgrade_request($data) {
         return $this->db->insert('upgrade_table', $data);
     }
+    public function get_upgrade_requests() {
+        return $this->db
+            ->join('user_table ut', 'ut.user_id = ugt.user_id')
+            ->get_where('upgrade_table ugt')->result();
+    }
     
     public function update_shipping_address($data, $user_id) {
         return $this->db->where(array("user_id" => $user_id))->update('address_table', $data);

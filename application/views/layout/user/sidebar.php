@@ -11,6 +11,12 @@
             <span class="nav-link-text">Go to Site</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="<?php echo site_url("user/dashboard")?>?>">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Index</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-user"></i>
