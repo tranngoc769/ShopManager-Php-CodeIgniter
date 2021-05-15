@@ -22,7 +22,6 @@
                   <th>No</th>
                   <th>Product Name</th>
                   <th>Unit Price</th>
-                  <th>Quantity</th>
                   <th>Price</th>
                 </tr>
               </thead>
@@ -32,7 +31,6 @@
                     <td><?= $count++;?></td>
                     <td align="left"><?= $product->product_name; ?></td>
                     <td>$ <?= $product->price; ?></td>
-                    <td><?= $product->quantity; ?></td>
                     <td>$ <?= number_format ( $product->quantity * $product->price, 2  );  ?></td>
                   </tr>
                 <?php endforeach; ?>
