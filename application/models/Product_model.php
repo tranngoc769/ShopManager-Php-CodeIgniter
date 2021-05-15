@@ -34,7 +34,7 @@ class Product_model extends CI_Model
     {
         return $this->db
             ->join('product_images pi', 'pi.product_id = pt.product_id')
-            ->get_where(PRODUCT, array("category_id" => $category_id, "active_flag" => 0));
+            ->get_where(PRODUCT, array("category_id" => $category_id, "active_flag" =>1));
     }
     public function getSellerProduct($seller_id = "")
     {
@@ -93,7 +93,7 @@ class Product_model extends CI_Model
     {
         return $this->db
             ->join('product_images pi', 'pi.product_id = pt.product_id')
-            ->like('product_name', "$search")->get_where(PRODUCT, array("active_flag" => 0));
+            ->like('product_name', "$search")->get_where(PRODUCT, array("active_flag" =>1));
     }
 
     public function changeStatus($product_id, $active_flag)
@@ -180,7 +180,7 @@ class Product_model extends CI_Model
     {
         $query = $this->db->limit($limit, $start)
             ->join('product_images pi', 'pi.product_id = pt.product_id')
-            ->get_where('product_table pt', array('pt.active_flag' => 0));
+            ->get_where('product_table pt', array('pt.active_flag' => 1));
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
