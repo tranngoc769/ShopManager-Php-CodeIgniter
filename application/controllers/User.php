@@ -17,6 +17,39 @@ class User extends My_Controller
         $this->load->view('layout/dashboard/logout');
         $this->load->view('layout/user/footer');
     }
+    public function upgrade(){
+        $data['status'] = false;
+        $data['text'] = 'Not request for upgrade';
+        if ($this->user_model->get_upgrade_status($this->session->userdata('userid'))){
+            $data['status'] = true;
+            $data['text'] = 'Requested for upgrade';
+        }
+        $this->gate_model->dev_user_data();
+        $this->load->view('layout/user/header', array('title' => 'Change Details'));
+        $this->loadUserSidebar('show_profile', 'change_detail_active');
+        $this->load->view('user/upgrade',$data);
+        $this->load->view('layout/dashboard/logout');
+        $this->load->view('layout/user/footer');
+    }
+    public function upgradedev(){
+        $this->gate_model->user_gate();
+        $user_id = $this->session->userdata('userid');
+        if ($this->user_model->get_upgrade_status( $user_id )){
+            $this->session->set_flashdata('msg', "Already request"); 
+            redirect(site_url('user/upgrade'));
+            return;
+        }
+        $data['user_id'] = $user_id;
+        if ($this->user_model->upgrade_request($data)){
+            $this->session->set_flashdata('msg', "Request success"); 
+            redirect(site_url('user/upgrade'));
+            return;
+        }
+        $this->session->set_flashdata('msg', "Something error"); 
+        redirect(site_url('user/upgrade'));
+        return;
+
+    }
     public function index() {
         $this->gate_model->dev_user_data();
         $this->load->view('layout/user/header');

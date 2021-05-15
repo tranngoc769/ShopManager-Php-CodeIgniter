@@ -36,6 +36,18 @@
             </li>
           </ul>
         </li>
+        
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages" <?php if ($this->session->userdata('usertype')!="user"){echo "hidden";}?>>
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#upgrade" data-parent="#upgrade">
+              <i class="fa fa-user"></i>
+              <span class="nav-link-text">Upgrade</span>
+            </a>
+            <ul class="sidenav-second-level collapse <?= $show_profile; ?>" id="upgrade">
+              <li class="<?= $change_password_active; ?>">
+                <a href="<?php echo site_url("user/upgrade");?>">To developer</a>
+              </li>
+            </ul>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#product" data-parent="#exampleAccordion">
             <i class="fa fa-shopping-cart"></i>

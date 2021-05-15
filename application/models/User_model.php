@@ -46,6 +46,17 @@ class User_model extends CI_Model {
         return $this->db->insert('address_table', $data);
     }
     
+    public function get_upgrade_status($user_id){
+        $query = $this->db->get_where('upgrade_table', array('user_id' => $user_id));
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function upgrade_request($data) {
+        return $this->db->insert('upgrade_table', $data);
+    }
     
     public function update_shipping_address($data, $user_id) {
         return $this->db->where(array("user_id" => $user_id))->update('address_table', $data);
