@@ -19,8 +19,22 @@ class CART extends CI_Controller {
         // $this->gate_model->ajax_gate();
         $product_id = $_POST['product_id'];
         $quantity = $_POST['quantity'];
+        $uid = $this->session->userdata('userid');
         if ($quantity != 1){
             $quantity = 1;
+        }
+        $bought_exist = $this->product_model->check_if_bought_or_in_cart($product_id,  $uid);
+        if ($bought_exist ){
+            $message = "Already bought or in cart";
+            $array = array (
+                "success" => false,
+                "message" => $message,
+                "title" => "Warning!"
+            );
+            header('Access-Control-Allow-Origin: *');
+            header('Content-Type: application/json');
+            echo json_encode($array);
+            return;
         }
         if ($this->session->userdata('usertype') != 'user' && $this->session->userdata('usertype') != 'admin') {
             $message = "Need to login first!";
