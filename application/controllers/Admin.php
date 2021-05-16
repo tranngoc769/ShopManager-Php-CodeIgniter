@@ -153,36 +153,18 @@ class Admin extends My_Controller
         $this->load->view('layout/dashboard/footer');
     }
     
-    public function manage_order()
+    public function manage_product()
     {
         $this->gate_model->admin_gate();
         
-        $orders = $this->cart_model->getAllOrders()->result();
-        foreach($orders as $order) {
-            $order->totalPrice = $this->cart_model->getTotalCartPrice($order->cart_id);
-        }
-        $data["orders"] = $orders;
+        $products = $this->product_model->getAllProducts()->result();
+        $data["products"] = $products;
         $this->load->view('layout/dashboard/header', array("title" => "Manage Orders"));
         $this->loadSidebar("show_order", "manage_order_active");
-        $this->load->view("admin/manage_order", $data);
+        $this->load->view("admin/manage_product", $data);
         $this->load->view('layout/dashboard/footer');
     }
-    
-    public function manage_cart()
-    {
-        $this->gate_model->admin_gate();
-        $carts = $this->cart_model->getAllActiveCarts()->result();
-        foreach($carts as $cart) {
-            $cart->totalPrice = $this->cart_model->getTotalCartPrice($cart->cart_id);
-        }
-        
-        $data["carts"] = $carts;
-        $this->load->view('layout/dashboard/header', array("title" => "Manage Cart"));
-        $this->loadSidebar("show_order", "manage_cart_active");
-        $this->load->view("admin/manage_cart", $data);
-        $this->load->view('layout/dashboard/footer');
-    }
-    
+
     public function view_cart($cart_id)
     {
         $this->gate_model->admin_gate();

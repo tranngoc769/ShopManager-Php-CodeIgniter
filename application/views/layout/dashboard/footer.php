@@ -1,7 +1,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Awesome eStore 2017</small>
+          <small>Copyright © App Store 2017</small>
         </div>
       </div>
     </footer>

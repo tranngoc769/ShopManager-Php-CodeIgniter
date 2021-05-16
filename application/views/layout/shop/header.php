@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>Awesome eStore <?= $title; ?></title>
+		<title>App Store <?= $title; ?></title>
 		<link rel="icon" href="<?= base_url('style/assets/images/icon.png'); ?>" type="image/gif">
 
 		<!-- Bootstrap core CSS -->
@@ -70,7 +70,7 @@
 		<!-- Navigation -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 			<div class="container">
-				<a class="navbar-brand" href="<?= site_url('shop'); ?>" >Awesome eStore</a>
+				<a class="navbar-brand" href="<?= site_url('shop'); ?>" >App Store</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -87,9 +87,9 @@
 						<!-- <li class="nav-item">
 							<a class="nav-link" href="#">Services</a>
 						</li> -->
-						<li class="nav-item <?= $contact; ?>">
+						<!-- <li class="nav-item <?= $contact; ?>">
 							<a class="nav-link" href="<?= site_url('shop/contact');?>"><b>Contact</b></a>
-						</li>
+						</li> -->
 						<li class="nav-item">
 							<?php 	if ($this->session->userdata('usertype') == "admin") : ?>
 								<li class="nav-item"><a class="nav-link" href="<?php echo base_url()?>index.php/admin"><b>Admin Dashboard</b></a></li>

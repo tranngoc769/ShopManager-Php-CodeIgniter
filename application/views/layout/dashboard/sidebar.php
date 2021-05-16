@@ -53,14 +53,11 @@
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Orders and Cart">
 					<a class="nav-link nav-link-collapse" data-toggle="collapse" href="#collapseMulti5" data-parent="#exampleAccordion">
 						<i class="fa fa-fw fa-shopping-cart"></i>
-						<span class="nav-link-text">Orders and Cart</span>
+						<span class="nav-link-text">Product</span>
 					</a>
 					<ul class="sidenav-second-level collapse <?= $show_order; ?>" id="collapseMulti5">
 						<li class="<?= $manage_order_active; ?>">
-							<a href="<?= site_url('admin/manage_order'); ?>">Manage Order</a>
-						</li>
-						<li class="<?= $manage_cart_active; ?>">
-							<a href="<?= site_url('admin/manage_cart'); ?>">Manage Cart</a>
+							<a href="<?= site_url('admin/manage_product'); ?>">Product</a>
 						</li>
 					</ul>
 				</li>

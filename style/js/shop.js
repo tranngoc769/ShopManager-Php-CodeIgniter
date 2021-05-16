@@ -1,4 +1,4 @@
-const base_url = "http://localhost/";
+const base_url2 = "http://5ae8f8abd461.ngrok.io/";
 $(function() {
     $('.list-group-item').on('click', function() {
         $('.fa', this)
@@ -10,7 +10,7 @@ $(function() {
         e.preventDefault();
         // var form_data = $("#add-product-form").serialize();
         var formData = new FormData($("#add-product-form")[0]);
-        var url = base_url + "index.php/Product/draffProduct";
+        var url = base_url2 + "index.php/Product/draffProduct";
         var settings = {
             "url": url,
             "method": "POST",
