@@ -64,12 +64,6 @@ class CI_Config {
 	 */
 	public $is_loaded =	array();
 
-	/**
-	 * List of paths to search when trying to load a config file.
-	 *
-	 * @used-by	CI_Loader
-	 * @var		array
-	 */
 	public $_config_paths =	array(APPPATH);
 
 	// --------------------------------------------------------------------
@@ -104,7 +98,7 @@ class CI_Config {
 			}
 			else
 			{
-				$base_url = 'http://localhost/';
+				$base_url = 'http://5ae8f8abd461.ngrok.io/';
 			}
 
 			$this->set_item('base_url', $base_url);
