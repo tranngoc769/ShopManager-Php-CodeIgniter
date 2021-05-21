@@ -16,7 +16,6 @@ class MostFree extends CI_Controller {
     
     public function index() {
         $this->load->library('pagination');
-        
         $config['base_url'] = site_url('shop/index');
         $config['per_page'] = 6;
         $config['uri_segment'] = 3;
@@ -45,8 +44,13 @@ class MostFree extends CI_Controller {
         } else {
             $offset = ($page-1)*$config['per_page']+1;
         }
+        
         $sixProducts = $this->product_model->GetMostFreeDownLoadProduct($config['per_page'], $offset);
-        $config['total_rows'] = count($sixProducts);
+        
+        $config['total_rows'] = 0;
+        if ($sixProducts){
+            $config['total_rows'] = count($sixProducts);
+        }
         $link = $this->pagination->create_links();
         $active = array(
             "home" => null,

@@ -1,4 +1,4 @@
-const base_url2 = "http://5ae8f8abd461.ngrok.io/";
+const base_url2 = "http://b0ecf4076f19.ngrok.io/";
 $(function() {
     $('.list-group-item').on('click', function() {
         $('.fa', this)

@@ -105,10 +105,6 @@ class Account extends CI_Controller {
         $this->session->set_flashdata($flash_type, $flash_content);
         redirect($redirect_to);
     }
-
-    /**
-        Sign out
-    **/
     public function logout()
     {
         $array_items = array('username', 'usertype');
